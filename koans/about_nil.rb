@@ -27,9 +27,6 @@ class AboutNil < EdgeCase::Koan
     assert_equal '', nil.to_s
     assert_equal 'nil', nil.inspect
 
-    puts nil.nil?
-    puts nil.object_id
-    puts nil == nil
     # THINK ABOUT IT:
     #
     # Is it better to use
