@@ -4,8 +4,6 @@ class AboutBlocks < EdgeCase::Koan
   def method_with_block
     result = yield
     result
-
-
   end
 
   def test_methods_can_take_blocks
