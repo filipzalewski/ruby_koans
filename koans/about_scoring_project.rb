@@ -69,6 +69,39 @@ class AboutScoringProject < EdgeCase::Koan
   def test_score_of_mixed_is_sum
     assert_equal 250, score([2,5,2,2,3])
     assert_equal 550, score([5,5,5,5])
+    assert_equal 1100, score([1,1,1,1])
   end
+
+  def score(dicerolls)
+    score = 0
+    tally = Hash.new(0)
+   
+
+    # I wonder if there's a more idiomatic way of acheiving this? 
+    dicerolls.each{ |r| tally[r] = tally[r] + 1}
+    
+    #tally.reject{ |k,v| k != 3 || k != 5 || v < 3 }
+    
+    tally.each_pair{ |k,v|
+        if k == 1 
+            score += calculate(k, v, 1000, 100)
+        elsif k == 5 
+            score += calculate(k, v, 100, 50)
+        else 
+            score += calculate(k,v,100,0)
+        end
+    }
+
+    return score 
+  end
+
+  def calculate(k, v, triple, single) 
+    if v >= 3
+        return (v / 3) * (k * triple) + (v % 3 * single)
+    else
+        return v * single
+    end
+     
+  end 
 
 end
